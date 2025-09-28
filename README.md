@@ -1,2 +1,2 @@
-# ClipNet-Backend
-The Backend of ClipNet: A modern Wiki-System.
+# ClipNet API
+The API of ClipNet: A modern Wiki-System built with FastAPI.
