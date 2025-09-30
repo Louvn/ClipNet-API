@@ -1,11 +1,11 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, constr
 
-class UserCreate(BaseModel):
+class UserCreateData(BaseModel):
     username: str
-    password: str
+    password: constr(min_length=8)
     token: str # For Permission-Only Logins
 
-class UserOut(BaseModel):
+class UserOutData(BaseModel):
     id: int
     username: str
 

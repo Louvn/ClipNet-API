@@ -1,15 +1,14 @@
 from fastapi import APIRouter, Body, Depends, HTTPException
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordRequestForm
 import jwt, time, os
 from src.database import get_db
 from src.models import User
 from src.utils.hash import verify
 
 router = APIRouter(tags=["authentification"])
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 SECRET = os.getenv("JWT_SECRET")
-ALGORITHM = "HS256"
+ALGORITHM = os.getenv("JWT_ALGORITHM")
 
 def login(form: OAuth2PasswordRequestForm = Depends(), db = Depends(get_db)):
     existing_user = db.query(User).filter(User.username == form.username).first()
