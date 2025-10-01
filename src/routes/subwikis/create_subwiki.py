@@ -3,6 +3,7 @@ from src.database import get_db
 from src.schematics.subwiki import SubWikiCreateData
 from src.models import SubWiki
 from src.core.security.jwt_helpers import get_current_user
+from src.core.slugs.generate_slug import generate_unique_slug
 
 def create_subwiki(subwiki_data: SubWikiCreateData, db = Depends(get_db), user = Depends(get_current_user)):
     existing_subwiki = db.query(SubWiki).filter(SubWiki.name == subwiki_data.name).first()
@@ -11,9 +12,13 @@ def create_subwiki(subwiki_data: SubWikiCreateData, db = Depends(get_db), user =
 
     new_subwiki = SubWiki(
         name = subwiki_data.name,
-        owner = user
+        owner = user,
+        slug = ""
     )
     db.add(new_subwiki)
+    db.flush()
+    new_subwiki.slug = generate_unique_slug(new_subwiki.name, SubWiki, new_subwiki.id)
+
     db.commit()
     db.refresh(new_subwiki)
 

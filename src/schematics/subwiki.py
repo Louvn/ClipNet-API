@@ -5,4 +5,5 @@ class SubWikiCreateData(BaseModel):
 
 class SubWikiOutData(BaseModel):
     name: str
+    slug: str
     id: int
