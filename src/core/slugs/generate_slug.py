@@ -27,5 +27,5 @@ def generate_unique_slug(text: str, sql_table, add_if_not_unique: str):
     if is_slug_unique(slug, sql_table):
         return slug
     
-    slug += add_if_not_unique
+    slug += str(add_if_not_unique)
     return slug

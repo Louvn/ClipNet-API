@@ -5,8 +5,6 @@ from src.database import get_db
 from src.models import User
 from src.utils.hash import verify
 
-router = APIRouter(tags=["authentification"])
-
 SECRET = os.getenv("JWT_SECRET")
 ALGORITHM = os.getenv("JWT_ALGORITHM")
 

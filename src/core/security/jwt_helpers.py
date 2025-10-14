@@ -18,6 +18,11 @@ def get_current_user(token: str = Depends(oauth2_scheme), db = Depends(get_db)):
     except jwt.InvalidTokenError:
         raise HTTPException(status_code=401, detail="Invalid token")
     
+    if username is None:
+        raise HTTPException(status_code=401, detail="Token payload invalid")
+    
     user = db.query(User).filter(User.username == username).first()
     if user is None:
-        raise HTTPException(status_code=401, detail="User does not exists")
+        raise HTTPException(status_code=401, detail="User does not exist")
+    
+    return user
