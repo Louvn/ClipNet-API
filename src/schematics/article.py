@@ -6,6 +6,7 @@ class ArticleCreateData(BaseModel):
     subwiki_id: int
 
 class ArticleOutData(BaseModel):
-    id: str
-    name: str
-    content: str
+    id: int
+    slug: str
+    op_id: int
+    subwiki_id: int
