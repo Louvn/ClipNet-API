@@ -7,6 +7,7 @@ from src.models.revision import Revision
 from sqlalchemy import and_
 
 def edit_article(revision_data: RevisionCreateData, user = Depends(get_current_user), db = Depends(get_db)):
+    "Editing an Article will create a new Revision and set it to the current_revision"
     # Find the article to edit
     existing_article_with_id = db.query(Article).filter(Article.id == revision_data.article_id).first()
     if not existing_article_with_id:

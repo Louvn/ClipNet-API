@@ -4,6 +4,7 @@ from src.schematics.subwiki import SubWikiCreateData
 from src.models import SubWiki
 from src.core.security.jwt_helpers import get_current_user
 from src.core.slugs.generate_slug import generate_unique_slug
+from ..articles.create_article import create_article
 
 def create_subwiki(subwiki_data: SubWikiCreateData, db = Depends(get_db), user = Depends(get_current_user)):
     existing_subwiki = db.query(SubWiki).filter(SubWiki.name == subwiki_data.name).first()

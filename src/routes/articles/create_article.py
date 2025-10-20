@@ -11,6 +11,7 @@ from src.models.subwiki import SubWiki
 from src.models.revision import Revision
 
 def create_article(article_data: ArticleCreateData, db = Depends(get_db), user = Depends(get_current_user)):
+    "Creating an Article will create the Article itself and the first Revision."
     # Avoid name conflicts in subwikis
     rev = aliased(Revision)
     existing_article_with_name = (

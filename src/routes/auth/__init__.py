@@ -4,7 +4,7 @@ from .register import register
 from .login import login
 from src.schematics.user import UserOutData
 
-router = APIRouter(tags=["authentification"])
+router = APIRouter(tags=["authentification", "users"])
 
 router.add_api_route(
     "/register",
