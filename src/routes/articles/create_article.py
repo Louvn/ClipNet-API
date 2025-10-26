@@ -7,7 +7,6 @@ from src.core.slugs.generate_slug import generate_unique_slug
 from src.schematics.article import ArticleCreateData, ArticleOutData
 from src.schematics.revision import RevisionOutData
 from src.models.article import Article
-from src.models.subwiki import SubWiki
 from src.models.revision import Revision
 
 def create_article(article_data: ArticleCreateData, db = Depends(get_db), user = Depends(get_current_user)):
@@ -18,20 +17,12 @@ def create_article(article_data: ArticleCreateData, db = Depends(get_db), user =
         db.query(Article)
         .join(rev, Article.current_revision)
         .filter(
-            and_(
-                rev.name == article_data.name, 
-                Article.subwiki_id == article_data.subwiki_id
-            )
+            rev.name == article_data.name
         )
         .first()
     )
     if existing_article_with_name:
-        raise HTTPException(status_code=400, detail="Article does already exists in this SubWiki")
-    
-    # Find the subwiki to create the article there
-    existing_subwiki = db.query(SubWiki).filter(SubWiki.id == article_data.subwiki_id).first()
-    if not existing_subwiki:
-        raise HTTPException(status_code=400, detail="A SubWiki with this ID does not exists")
+        raise HTTPException(status_code=400, detail="Article does already exists")
     
     # Create first revision
     new_revision = Revision(
@@ -46,8 +37,7 @@ def create_article(article_data: ArticleCreateData, db = Depends(get_db), user =
         current_revision = new_revision,
         revisions = [new_revision],
         slug = "",
-        op = user,
-        subwiki = existing_subwiki
+        op = user
     )
 
     db.add_all([new_revision, new_article])

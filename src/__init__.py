@@ -27,9 +27,7 @@ def on_startup():
 
 # Routes
 from .routes.auth import router as auth_router
-from .routes.subwikis import router as subwikis_router
 from .routes.articles import router as articles_router
 
 app.include_router(auth_router)
-app.include_router(subwikis_router)
 app.include_router(articles_router)
