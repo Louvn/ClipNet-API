@@ -1,2 +1,2 @@
 # ClipNet API
-The API of ClipNet: A modern Wiki-System built with FastAPI.
+ClipNet: A modern Wiki-System built with FastAPI and React.

@@ -1,0 +1,30 @@
+.Navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: var(--secondary-color);
+    width: 100%;
+    position: sticky;
+    top: 0;
+    height: 70px;
+    z-index: 100;
+    align-items: center;
+    border-bottom: 2px solid #ccc;
+}
+
+.Logo {
+    display: flex;
+    gap: 5px;
+}
+
+.LogoText {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 50px;
+    font-family: var(--logo-font);
+    font-weight: 400;
+}
+.LogoImg {
+    height: 60px;
+    width: auto;
+}
